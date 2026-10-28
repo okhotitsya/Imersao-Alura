@@ -1,0 +1,6 @@
+{
+  "name": "Calculadora Python - Guia Interativo & Interface Gráfica",
+  "description": "Aprenda a criar uma calculadora com interface gráfica em Python (Tkinter) passo a passo, com simulador interativo, explicações e código para download.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
