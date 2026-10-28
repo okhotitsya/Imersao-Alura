@@ -268,20 +268,20 @@ export default function App() {
           </section>
         )}
 
-        {/* Visão Rápida dos 4 Operadores Matemáticos em Python (Card Resumo) */}
+        {/* Visão Rápida das Operações em Python (Card Resumo) */}
         <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-5 shadow-lg flex flex-col gap-4">
           <h3 className="text-sm font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
             <Calculator className="w-4 h-4 text-emerald-400" />
-            Resumo Rápido das 4 Operações Básicas no Python
+            Resumo das Operações Matemáticas & Porcentagem no Python
           </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
             <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/80 flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-bold text-white">1. Adição</span>
                 <span className="text-base font-mono font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">+</span>
               </div>
-              <p className="text-xs text-slate-400">Soma valores numéricos inteiros ou decimais.</p>
-              <code className="text-[11px] font-mono text-emerald-300 mt-1">resultado = 15 + 25  # 40</code>
+              <p className="text-xs text-slate-400">Soma valores inteiros ou decimais.</p>
+              <code className="text-[11px] font-mono text-emerald-300 mt-1">15 + 25  # 40</code>
             </div>
 
             <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/80 flex flex-col gap-1.5">
@@ -289,8 +289,8 @@ export default function App() {
                 <span className="text-xs font-bold text-white">2. Subtração</span>
                 <span className="text-base font-mono font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">-</span>
               </div>
-              <p className="text-xs text-slate-400">Calcula a diferença entre dois números.</p>
-              <code className="text-[11px] font-mono text-emerald-300 mt-1">resultado = 50 - 18  # 32</code>
+              <p className="text-xs text-slate-400">Calcula a diferença entre números.</p>
+              <code className="text-[11px] font-mono text-emerald-300 mt-1">50 - 18  # 32</code>
             </div>
 
             <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/80 flex flex-col gap-1.5">
@@ -298,8 +298,8 @@ export default function App() {
                 <span className="text-xs font-bold text-white">3. Multiplicação</span>
                 <span className="text-base font-mono font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">*</span>
               </div>
-              <p className="text-xs text-slate-400">Usa o asterisco (*) em vez do símbolo visual (×).</p>
-              <code className="text-[11px] font-mono text-emerald-300 mt-1">resultado = 6 * 7    # 42</code>
+              <p className="text-xs text-slate-400">Usa o asterisco (*) para multiplicar.</p>
+              <code className="text-[11px] font-mono text-emerald-300 mt-1">6 * 7    # 42</code>
             </div>
 
             <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/80 flex flex-col gap-1.5">
@@ -307,8 +307,17 @@ export default function App() {
                 <span className="text-xs font-bold text-white">4. Divisão</span>
                 <span className="text-base font-mono font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">/</span>
               </div>
-              <p className="text-xs text-slate-400">Usa a barra (/) e sempre gera um float.</p>
-              <code className="text-[11px] font-mono text-emerald-300 mt-1">resultado = 80 / 4   # 20.0</code>
+              <p className="text-xs text-slate-400">Usa a barra (/) e gera float.</p>
+              <code className="text-[11px] font-mono text-emerald-300 mt-1">80 / 4   # 20.0</code>
+            </div>
+
+            <div className="p-3.5 rounded-xl border border-slate-800 bg-slate-950/80 flex flex-col gap-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-bold text-white">5. Porcentagem</span>
+                <span className="text-base font-mono font-bold text-sky-400 bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">%</span>
+              </div>
+              <p className="text-xs text-slate-400">Fração de 100 ou taxa proporcional.</p>
+              <code className="text-[11px] font-mono text-emerald-300 mt-1">200 + 15% # 230</code>
             </div>
           </div>
         </div>

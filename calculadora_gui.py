@@ -4,6 +4,7 @@
 # ========================================================
 
 import tkinter as tk
+import re
 
 # --------------------------------------------------------
 # 1. FUNÇÕES DE LÓGICA E OPERAÇÕES
@@ -27,6 +28,40 @@ def apagar_ultimo():
     """Apaga o último caractere digitado (Backspace)."""
     texto_atual = visor_var.get()
     visor_var.set(texto_atual[:-1])  # Usa fatia de string do Python
+
+def porcentagem():
+    """Calcula a porcentagem.
+    - Se for número isolado (ex: 50%), converte para decimal: 0.5
+    - Se for expressão composta (ex: 200 + 10%), calcula 10% de 200 = 20, resultando em 200 + 20."""
+    expressao = visor_var.get()
+    if not expressao or expressao.startswith("Erro"):
+        return
+        
+    try:
+        # Verifica se temos uma operação com número base e percentual (ex: 200 + 10)
+        match = re.match(r'^(.+?)([\+\-\×\*\÷\/])(\d+(?:\.\d+)?)$', expressao)
+        if match:
+            base_expr, operador, porcentagem_val = match.groups()
+            base_formatada = base_expr.replace('×', '*').replace('÷', '/')
+            valor_base = eval(base_formatada)
+            
+            # Calcula o valor percentual sobre a base
+            valor_percentual = (float(valor_base) * float(porcentagem_val)) / 100
+            if isinstance(valor_percentual, float) and valor_percentual.is_integer():
+                valor_percentual = int(valor_percentual)
+                
+            visor_var.set(f"{base_expr}{operador}{valor_percentual}")
+        else:
+            # Número simples (ex: 50 -> 0.5)
+            expressao_formatada = expressao.replace('×', '*').replace('÷', '/')
+            valor = eval(expressao_formatada)
+            resultado = float(valor) / 100
+            if isinstance(resultado, float) and resultado.is_integer():
+                resultado = int(resultado)
+            visor_var.set(str(resultado))
+            
+    except Exception:
+        visor_var.set("Erro")
 
 def calcular():
     """Calcula a expressão matemática das 4 operações."""
@@ -80,31 +115,33 @@ visor.grid(row=0, column=0, columnspan=4, padx=14, pady=(20, 14), ipady=12, stic
 
 # --------------------------------------------------------
 # 4. MAPA DOS BOTÕES (LINHAS E COLUNAS)
+# Layout padronizado em 5 linhas x 4 colunas com Porcentagem (%)
 # --------------------------------------------------------
 botoes = [
     # (Texto, Linha, Coluna, Cor de Fundo, Comando)
     ('C', 1, 0, '#EF4444', limpar),
     ('⌫', 1, 1, '#64748B', apagar_ultimo),
-    ('÷', 1, 2, '#F59E0B', lambda: ao_clicar('÷')),
-    ('×', 1, 3, '#F59E0B', lambda: ao_clicar('×')),
+    ('%', 1, 2, '#64748B', porcentagem),
+    ('÷', 1, 3, '#F59E0B', lambda: ao_clicar('÷')),
     
     ('7', 2, 0, '#334155', lambda: ao_clicar('7')),
     ('8', 2, 1, '#334155', lambda: ao_clicar('8')),
     ('9', 2, 2, '#334155', lambda: ao_clicar('9')),
-    ('-', 2, 3, '#F59E0B', lambda: ao_clicar('-')),
+    ('×', 2, 3, '#F59E0B', lambda: ao_clicar('×')),
     
     ('4', 3, 0, '#334155', lambda: ao_clicar('4')),
     ('5', 3, 1, '#334155', lambda: ao_clicar('5')),
     ('6', 3, 2, '#334155', lambda: ao_clicar('6')),
-    ('+', 3, 3, '#F59E0B', lambda: ao_clicar('+')),
+    ('-', 3, 3, '#F59E0B', lambda: ao_clicar('-')),
     
     ('1', 4, 0, '#334155', lambda: ao_clicar('1')),
     ('2', 4, 1, '#334155', lambda: ao_clicar('2')),
     ('3', 4, 2, '#334155', lambda: ao_clicar('3')),
-    ('=', 4, 3, '#10B981', calcular),
+    ('+', 4, 3, '#F59E0B', lambda: ao_clicar('+')),
     
     ('0', 5, 0, '#334155', lambda: ao_clicar('0'), 2), # Ocupa 2 colunas
     ('.', 5, 2, '#334155', lambda: ao_clicar('.')),
+    ('=', 5, 3, '#10B981', calcular),
 ]
 
 # --------------------------------------------------------

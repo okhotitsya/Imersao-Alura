@@ -29,11 +29,12 @@ Este projeto foi desenhado especialmente para quem está dando os primeiros pass
 
 ## ✨ Funcionalidades
 
-- **4 Operações Matemáticas Básicas**:
+- **4 Operações Matemáticas Básicas + Porcentagem**:
   - Adição (`+`)
   - Subtração (`-`)
   - Multiplicação (`*` representado visualmente por `×`)
   - Divisão (`/` representado visualmente por `÷`)
+  - **Porcentagem (`%`)**: Converte valores isolados para decimal (`50%` -> `0.5`) ou calcula o acréscimo/desconto proporcional em expressões compostas (ex: `200 + 10%` calcula 10% de 200 = 20, preparando a conta `200 + 20`).
 - **Limpeza Rápida (`C`)**: Apaga todo o visor em um clique.
 - **Backspace (`⌫`)**: Remove o último dígito inserido utilizando fatiamento de strings (`[:-1]`).
 - **Ponto Decimal (`.`)**: Suporte a números com casas decimais (números de ponto flutuante).
@@ -46,7 +47,7 @@ Este projeto foi desenhado especialmente para quem está dando os primeiros pass
 
 ## 🔍 Explicação Detalhada das Funções
 
-O script Python é dividido em 4 funções essenciais:
+O script Python é dividido em 5 funções essenciais:
 
 ### 1. `ao_clicar(caractere)`
 ```python
@@ -83,7 +84,41 @@ def apagar_ultimo():
 
 ---
 
-### 4. `calcular()`
+### 4. `porcentagem()`
+```python
+def porcentagem():
+    expressao = visor_var.get()
+    if not expressao or expressao.startswith("Erro"):
+        return
+        
+    try:
+        # Detecta se é cálculo proporcional (ex: 200 + 10%)
+        match = re.match(r'^(.+?)([\+\-\×\*\÷\/])(\d+(?:\.\d+)?)$', expressao)
+        if match:
+            base_expr, operador, porcentagem_val = match.groups()
+            base_formatada = base_expr.replace('×', '*').replace('÷', '/')
+            valor_base = eval(base_formatada)
+            valor_percentual = (float(valor_base) * float(porcentagem_val)) / 100
+            if isinstance(valor_percentual, float) and valor_percentual.is_integer():
+                valor_percentual = int(valor_percentual)
+            visor_var.set(f"{base_expr}{operador}{valor_percentual}")
+        else:
+            # Número simples (ex: 50 -> 0.5)
+            expressao_formatada = expressao.replace('×', '*').replace('÷', '/')
+            valor = eval(expressao_formatada)
+            resultado = float(valor) / 100
+            if isinstance(resultado, float) and resultado.is_integer():
+                resultado = int(resultado)
+            visor_var.set(str(resultado))
+    except Exception:
+        visor_var.set("Erro")
+```
+- **O que faz**: Adiciona suporte completo ao cálculo de porcentagens.
+- **Como funciona**: Se o visor tiver apenas um número (`50`), divide por 100 gerando `0.5`. Se for uma conta composta como `200 + 10`, calcula 10% de 200 (= 20) e atualiza o visor para `200 + 20`, permitindo que ao apertar `=` o resultado seja 220!
+
+---
+
+### 5. `calcular()`
 ```python
 def calcular():
     expressao = visor_var.get()
