@@ -2,6 +2,8 @@
 
 Uma calculadora simples, moderna e organizada desenvolvida em **Python 3** com interface gráfica nativa (**Tkinter**), acompanhada de uma aplicação web interativa em **React + TypeScript + Tailwind CSS** para estudantes e iniciantes em programação.
 
+<img src="https://github.com/okhotitsya/Calculadora-em-Python/blob/main/imagem-site.png?raw=true">
+
 ---
 
 ## 📋 Sumário
